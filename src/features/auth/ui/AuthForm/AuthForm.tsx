@@ -3,7 +3,7 @@
 import { Input } from '@/shared/ui/Inputs/Input';
 import { Button } from '@/shared/ui/Buttons/Button';
 import { useAuthForm } from '@/features/auth/model/useAuthForm';
-import { LogoImage } from '@/shared/ui/Logo/Logo';
+import { LogoImage } from '@/shared/ui/logo/Logo';
 
 export const AuthForm = () => {
   const { formData, errors, handleChange, handleJoin } = useAuthForm();

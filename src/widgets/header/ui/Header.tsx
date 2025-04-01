@@ -2,7 +2,7 @@
 
 import { useAppRouter } from '@/shared/lib/navigation';
 import { Button } from '@/shared/ui/Buttons/Button';
-import { LogoImage } from '@/shared/ui/Logo/Logo';
+import { LogoImage } from '@/shared/ui/logo/Logo';
 import { Navbar } from '@/shared/ui/navbar/ui/Navbar';
 
 const NAV_ITEMS = [
