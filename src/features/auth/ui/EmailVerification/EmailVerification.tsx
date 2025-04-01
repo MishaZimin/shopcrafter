@@ -2,8 +2,8 @@
 
 import { EmailVerificationTimer } from './EmailVerificationTimer';
 import { useAppRouter } from '@/shared/lib/navigation';
-import { Button } from '@/shared/ui/buttons/Button';
-import { LogoImage } from '@/shared/ui/logo/Logo';
+import { Button } from '@/shared/ui/Buttons/Button';
+import { LogoImage } from '@/shared/ui/Logo/Logo';
 
 export const EmailVerification = () => {
   const { router } = useAppRouter();

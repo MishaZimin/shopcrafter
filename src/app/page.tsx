@@ -1,7 +1,7 @@
 'use client';
 
 import { useAppRouter } from '@/shared/lib/navigation';
-import { Button } from '@/shared/ui/buttons/Button';
+import { Button } from '@/shared/ui/Buttons/Button';
 
 export default function Home() {
   const { router } = useAppRouter();
