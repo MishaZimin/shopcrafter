@@ -1,23 +1,23 @@
-import { cva, type VariantProps } from "class-variance-authority";
+import { cva, type VariantProps } from 'class-variance-authority';
 
 const inputVariants = cva(
-  "w-full px-3 pt-2 pb-2.5 rounded-lg font-base border h-10 focus:outline-none transition-all duration-200",
+  'w-full px-3 pt-2 pb-2.5 rounded-lg font-base border h-10 focus:outline-none transition-all duration-200',
   {
     variants: {
       variant: {
-        default: "border-graphite/20 focus:border-graphite/40",
-        error: "border-rose focus:border-rose",
+        default: 'border-graphite/20 focus:border-graphite/40',
+        error: 'border-rose focus:border-rose',
       },
       disabled: {
-        true: "bg-graphite/0 text-graphite/20 cursor-not-allowed",
-        false: "bg-transparent",
+        true: 'bg-graphite/0 text-graphite/20 cursor-not-allowed',
+        false: 'bg-transparent',
       },
       hasMailSuffix: {
-        true: "pr-[88px]",
+        true: 'pr-[88px]',
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: 'default',
       disabled: false,
     },
   },
@@ -61,11 +61,11 @@ export const Input = ({
           className={inputVariants({
             variant,
             disabled,
-            className: "disabled:opacity-50",
+            className: 'disabled:opacity-50',
           })}
         />
       </div>
-      {variant === "error" && errorText && (
+      {variant === 'error' && errorText && (
         <p className="text-xs leading-4 text-rose">{errorText}</p>
       )}
     </div>

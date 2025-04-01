@@ -2,15 +2,15 @@ import Link from 'next/link';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const buttonVariants = cva(
-  'rounded-[8px] text-center transition-all duration-200 disabled:bg-opacity-8 disabled:bg-graphite disabled:cursor-default disabled:border-none flex items-center justify-center',
+  'rounded-[12px] text-center transition-all duration-200 disabled:bg-opacity-8 disabled:bg-graphite disabled:cursor-default disabled:border-none flex items-center justify-center cursor-pointer',
   {
     variants: {
       textColor: {
         dark: 'text-graphite',
         light: 'text-white',
       },
-      buttonType: {
-        primary: 'bg-mint hover:bg-minthover active:bg-mintactive',
+      type: {
+        primary: 'bg-graphite hover:bg-graphite/90 active:bg-graphite/80',
         secondary:
           'bg-transparent border border-graphite/20 hover:bg-graphite/4 hover:border-opacity-0 active:bg-graphite/8 active:border-opacity-0',
       },
@@ -29,8 +29,8 @@ const buttonVariants = cva(
       },
     },
     defaultVariants: {
-      textColor: 'dark',
-      buttonType: 'primary',
+      textColor: 'light',
+      type: 'primary',
       size: 'default',
     },
   },
@@ -50,7 +50,7 @@ export const Button = ({
   link,
   text,
   textColor,
-  buttonType,
+  type,
   size,
   disabled,
   position,
@@ -61,7 +61,7 @@ export const Button = ({
 
   const classes = buttonVariants({
     textColor,
-    buttonType,
+    type,
     size,
     position,
     disabled,

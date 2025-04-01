@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const useEmailVerification = (initialTime = 210) => {
+export const useEmailVerification = (initialTime = 5) => {
   const [timeLeft, setTimeLeft] = useState(initialTime);
   const [canRequestNewLink, setCanRequestNewLink] = useState(false);
 

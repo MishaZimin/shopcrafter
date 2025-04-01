@@ -17,7 +17,12 @@
 }
 
 @layer base {
-  p {
+  p,
+  h1 {
     @apply font-base;
+  }
+
+  h1 {
+    @apply font-bold text-2xl;
   }
 }

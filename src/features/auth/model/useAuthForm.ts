@@ -33,7 +33,7 @@ export const useAuthForm = () => {
 
   const handleJoin = () => {
     if (validateForm()) {
-      console.log('Форма валидна, данные:', formData);
+      console.log('Форма:', formData);
       router.push('/auth/email-verification');
     }
   };
