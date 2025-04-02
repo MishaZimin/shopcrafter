@@ -9,7 +9,7 @@ const inputVariants = cva(
         error: 'border-rose focus:border-rose',
       },
       disabled: {
-        true: 'bg-graphite/0 text-graphite/20 cursor-not-allowed',
+        true: 'bg-graphite/10 text-graphite/100 cursor-not-allowed',
         false: 'bg-transparent',
       },
       hasMailSuffix: {

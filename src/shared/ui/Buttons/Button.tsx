@@ -13,6 +13,7 @@ const buttonVariants = cva(
         primary: 'bg-graphite hover:bg-graphite/90 active:bg-graphite/80',
         secondary:
           'bg-transparent border border-graphite/20 hover:bg-graphite/4 hover:border-opacity-0 active:bg-graphite/8 active:border-opacity-0',
+        red: 'bg-rose hover:bg-rosehover active:bg-roseactive',
       },
       size: {
         default: 'h-[42px] px-4',

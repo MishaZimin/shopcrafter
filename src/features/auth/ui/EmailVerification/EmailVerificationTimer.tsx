@@ -9,7 +9,9 @@ export const EmailVerificationTimer = () => {
   if (canRequestNewLink) {
     return (
       <button onClick={handleRequestNewLink}>
-        <p className="text-[14px] text-mint">Запросить новую ссылку</p>
+        <p className="text-[14px] text-graphite cursor-pointer">
+          Запросить новую ссылку
+        </p>
       </button>
     );
   }
