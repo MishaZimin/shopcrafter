@@ -1,11 +1,5 @@
-import Lending from '@/widgets/lending/ui/Lending';
+import InfoPage from '@/pages/info/ui/InfoPage';
 
-const InfoPage = () => {
-  return (
-    <>
-      <Lending />
-    </>
-  );
-};
-
-export default InfoPage;
+export default async function Page() {
+  return <InfoPage />;
+}

@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { cva, type VariantProps } from 'class-variance-authority';
 
 const buttonVariants = cva(
-  'rounded-[12px] text-center transition-all duration-200 disabled:bg-opacity-8 disabled:bg-graphite disabled:cursor-default disabled:border-none flex items-center justify-center cursor-pointer',
+  'text-center transition-all duration-200 disabled:bg-opacity-8 disabled:bg-graphite disabled:cursor-default disabled:border-none flex items-center justify-center cursor-pointer',
   {
     variants: {
       textColor: {
@@ -16,9 +16,10 @@ const buttonVariants = cva(
         red: 'bg-rose hover:bg-rosehover active:bg-roseactive',
       },
       size: {
-        default: 'h-[42px] px-4',
-        sm: 'h-[36px] px-4',
-        lg: 'h-[60px] px-6',
+        default: 'h-[40px] px-4 rounded-[12px] text-M',
+        sm: 'h-[36px] px-4 rounded-[12px] text-M',
+        lg: 'h-[60px] px-6 rounded-[12px] text-M',
+        xxl: 'h-[80px] px-6 text-[24px] font-bold w-full rounded-[16px]',
       },
       position: {
         left: 'mr-auto',

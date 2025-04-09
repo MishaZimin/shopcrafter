@@ -31,7 +31,7 @@ export const NavItem = ({ item, isActive = false, onClick }: NavItemProps) => {
   return onClick ? (
     <button onClick={onClick} className={className}>
       {item.icon}
-      <span>{item.name}</span>
+      <span className="text-M">{item.name}</span>
     </button>
   ) : (
     <Link
@@ -41,7 +41,7 @@ export const NavItem = ({ item, isActive = false, onClick }: NavItemProps) => {
       scroll={!item.anchor}
     >
       {item.icon}
-      <span>{item.name}</span>
+      <span className="text-M">{item.name}</span>
     </Link>
   );
 };

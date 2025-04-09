@@ -18,12 +18,12 @@ const NAV_ITEMS = [
     path: '/info',
     anchor: 'features',
   },
-  {
-    id: 'questions',
-    name: 'Частые вопросы',
-    path: '/info',
-    anchor: 'questions',
-  },
+  // {
+  //   id: 'questions',
+  //   name: 'Частые вопросы',
+  //   path: '/info',
+  //   anchor: 'questions',
+  // },
   {
     id: 'price',
     name: 'Цены',
@@ -42,8 +42,11 @@ export const Header = () => {
   return (
     <>
       <div className="fixed z-30 mr-[50px] w-full bg-white">
-        <header className="py-auto z-20 mx-auto flex h-[96px] w-full items-center justify-between align-middle lg:w-[1024px]">
-          <LogoImage />
+        <header className="py-auto z-20 mx-auto flex h-[96px] w-full items-center justify-between align-middle lg:w-[800px]">
+          <div className="max-w-[148px]">
+            <LogoImage />
+          </div>
+
           <div className="">
             <Navbar items={NAV_ITEMS} orientation="horizontal" />
           </div>

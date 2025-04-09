@@ -22,8 +22,34 @@
   span {
     @apply font-base;
   }
+}
 
-  h1 {
-    @apply font-bold text-2xl;
+@layer components {
+  .text-h1 {
+    @apply text-[42px] leading-[52px] font-bold;
+  }
+  .text-h2 {
+    @apply text-[32px] leading-[40px] font-bold;
+  }
+  .text-h3 {
+    @apply text-[28px] leading-[36px] font-semibold;
+  }
+  .text-h4 {
+    @apply text-[20px] leading-[28px] font-semibold;
+  }
+  .text-h5 {
+    @apply text-[16px] leading-[20px] font-semibold;
+  }
+  .text-L {
+    @apply text-[20px] leading-[28px];
+  }
+  .text-M {
+    @apply text-[16px] leading-[22px];
+  }
+  .text-S {
+    @apply text-[14px] leading-[20px];
+  }
+  .text-XS {
+    @apply text-[12px] leading-[16px];
   }
 }

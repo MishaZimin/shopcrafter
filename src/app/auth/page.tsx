@@ -1,7 +1,5 @@
-import { AuthForm } from '@/features/auth/ui/AuthForm/AuthForm';
+import AuthPage from '@/pages/auth/ui/AuthPage';
 
-const AuthPage = () => {
-  return <AuthForm />;
-};
-
-export default AuthPage;
+export default async function Page() {
+  return <AuthPage />;
+}

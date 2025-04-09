@@ -11,6 +11,7 @@ export const EmailVerification = () => {
   const handleBack = () => {
     router.push('/auth');
   };
+
   return (
     <div className="flex flex-col gap-8">
       <LogoImage />

@@ -23,7 +23,7 @@ export const AuthForm = () => {
 
       <div className="flex flex-col gap-2">
         <Button
-          text="Продолжить"
+          text="Получить ссылку для входа"
           textColor="light"
           type="primary"
           onClick={handleJoin}

@@ -1,7 +1,5 @@
-import { EmailVerification } from '@/features/auth/ui/EmailVerification/EmailVerification';
+import EmailVerificationPage from '@/pages/auth/ui/EmailVerificationPage';
 
-const EmailVerificationPage = () => {
-  return <EmailVerification />;
-};
-
-export default EmailVerificationPage;
+export default async function Page() {
+  return <EmailVerificationPage />;
+}
