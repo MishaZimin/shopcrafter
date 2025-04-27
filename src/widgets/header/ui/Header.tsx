@@ -1,60 +1,43 @@
 'use client';
 
 import { useAppRouter } from '@/shared/lib/navigation';
-import { Button } from '@/shared/ui/Buttons/Button';
+import { Button } from '@/shared/ui/button';
 import { LogoImage } from '@/shared/ui/logo/Logo';
-import { Navbar } from '@/shared/ui/navbar/ui/Navbar';
+import { NavMenu } from '@/shared/ui/navbar/ui/NavMenu';
 
-const NAV_ITEMS = [
-  {
-    id: 'home',
-    name: 'Для кого',
-    path: '/info',
-    anchor: 'hero',
-  },
-  {
-    id: 'features',
-    name: 'Для чего',
-    path: '/info',
-    anchor: 'features',
-  },
-  // {
-  //   id: 'questions',
-  //   name: 'Частые вопросы',
-  //   path: '/info',
-  //   anchor: 'questions',
-  // },
-  {
-    id: 'price',
-    name: 'Цены',
-    path: '/info',
-    anchor: 'price',
-  },
+const navItems = [
+  { value: 'shops', label: 'Магазины', path: '/my-shops' },
+  { value: 'tariffs', label: 'Тарифы', path: '/tariffs' },
+  { value: 'news', label: 'Новости', path: '/news' },
+  // { value: 'products', label: 'Товары', path: '/products' },
+  // { value: 'auth', label: 'auth', path: '/auth-select' },
 ];
 
 export const Header = () => {
   const { router } = useAppRouter();
 
   const handleClick = () => {
-    router.push('/auth');
+    router.push('/profile');
   };
 
   return (
-    <>
-      <div className="fixed z-30 mr-[50px] w-full bg-white">
-        <header className="py-auto z-20 mx-auto flex h-[96px] w-full items-center justify-between align-middle lg:w-[800px]">
-          <div className="max-w-[148px]">
+    <header className="fixed top-0 left-0 right-0 z-30 bg-white">
+      <div className="mx-auto flex h-[84px] w-full max-w-[1200px] items-center justify-between px-4 lg:px-0">
+        <div className="flex items-center gap-6">
+          <button
+            className="max-w-[148px]"
+            onClick={() => {
+              router.push('/');
+            }}
+          >
             <LogoImage />
-          </div>
-
-          <div className="">
-            <Navbar items={NAV_ITEMS} orientation="horizontal" />
-          </div>
-          <div className="">
-            <Button text={'Попробовать'} onClick={handleClick} />
-          </div>
-        </header>
+          </button>
+          <NavMenu tabs={navItems} />
+        </div>
+        <Button variant="ghost" onClick={handleClick}>
+          Иван Петров
+        </Button>
       </div>
-    </>
+    </header>
   );
 };

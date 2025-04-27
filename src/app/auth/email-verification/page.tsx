@@ -1,5 +1,5 @@
-import EmailVerificationPage from '@/pages/auth/ui/EmailVerificationPage';
+import { EmailVerification } from '@/features/auth/ui/EmailVerification/EmailVerification';
 
 export default async function Page() {
-  return <EmailVerificationPage />;
+  return <EmailVerification />;
 }

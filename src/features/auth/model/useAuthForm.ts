@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { useAppRouter } from '@/shared/lib/navigation';
+import { useLogin } from '../api/queries/authHooks';
+
+interface FormData {
+  mail: string;
+}
 
 export const useAuthForm = () => {
   const { router } = useAppRouter();
+  const { mutate, isPending } = useLogin();
 
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     mail: '',
   });
+
   const [errors, setErrors] = useState({
     mail: '',
   });
 
-  const handleChange = (field: keyof typeof formData) => (value: string) => {
+  const getChangeHandler = (field: keyof FormData) => (value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: '' }));
@@ -33,15 +40,22 @@ export const useAuthForm = () => {
 
   const handleJoin = () => {
     if (validateForm()) {
-      console.log('Форма:', formData);
-      router.push('/auth/email-verification');
+      mutate(formData.mail, {
+        onSuccess: () => {
+          router.push('/auth/email-verification');
+        },
+        onError: () => {
+          setErrors({ mail: 'Ошибка при отправке' });
+        },
+      });
     }
   };
 
   return {
     formData,
     errors,
-    handleChange,
+    getChangeHandler,
     handleJoin,
+    isPending,
   };
 };

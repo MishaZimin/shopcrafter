@@ -1,5 +1,5 @@
-import InfoPage from '@/pages/info/ui/InfoPage';
+import Landing from '@/widgets/landing/ui/Landing';
 
 export default async function Page() {
-  return <InfoPage />;
+  return <Landing />;
 }

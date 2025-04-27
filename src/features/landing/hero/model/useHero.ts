@@ -1,6 +1,10 @@
+import { useAppRouter } from '@/shared/lib/navigation';
+
 export const useHero = () => {
+  const { router } = useAppRouter();
+
   const handleCreateShopClick = () => {
-    console.log('Создать магазин');
+    router.push('/my-shops');
   };
 
   return { handleCreateShopClick };
