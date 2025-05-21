@@ -14,14 +14,7 @@ export default function ProfileSection() {
         <TariffPayCard />
 
         <div className="space-y-2">
-          <ProfileForm
-            initialData={{
-              //   name: profile.name,
-              //   email: profile.email,
-              name: '',
-              email: '',
-            }}
-          />
+          <ProfileForm />
         </div>
       </div>
     </div>
