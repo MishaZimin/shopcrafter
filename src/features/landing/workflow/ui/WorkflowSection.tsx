@@ -26,7 +26,7 @@ export const WorkflowSection = () => {
         <WorkflowCard
           image={Handmade}
           title={'4. Запускаешь магазин'}
-          description={'Получаешь ссылку и начинаешь продавать'}
+          description={'Получаешь ссылку и начинаешьпродавать'}
         />
       </div>
     </section>

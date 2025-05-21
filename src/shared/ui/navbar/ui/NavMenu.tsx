@@ -8,6 +8,7 @@ import {
 } from '@/shared/ui/navigation-menu';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
+import clsx from 'clsx';
 
 interface TabConfig {
   value: string;
@@ -34,16 +35,19 @@ export const NavMenu = ({
 
   return (
     <NavigationMenu className={className}>
-      <NavigationMenuList className="flex flex-row">
+      <NavigationMenuList>
         {tabs.map((tab) => {
-          const isActive = pathname === tab.path;
+          const isActive =
+            pathname === tab.path || pathname.startsWith(`${tab.path}/`);
+
           return (
             <NavigationMenuItem key={tab.value}>
-              <Link href={tab.path} legacyBehavior passHref>
+              <Link href={tab.path} passHref legacyBehavior>
                 <NavigationMenuLink
-                  className={`${itemClassName} ${
-                    isActive ? activeItemClassName : ''
-                  }`}
+                  data-active={isActive ? 'true' : undefined}
+                  className={clsx(itemClassName, {
+                    [activeItemClassName ?? '']: isActive,
+                  })}
                 >
                   {tab.label}
                 </NavigationMenuLink>

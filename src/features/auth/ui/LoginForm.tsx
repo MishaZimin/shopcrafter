@@ -1,34 +1,36 @@
 'use client';
 
 import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useState } from 'react';
 
-import { Button } from '@/shared/ui/button';
-import { Input } from '@/shared/ui/input';
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/shared/ui/form';
-import { LoginFormData, loginSchema } from '../model/authShema';
-import { Checkbox } from '@/shared/ui/checkbox';
 import { LogoImage } from '@/shared/ui/logo/Logo';
 
+import { CodeVerificationForm } from './CodeVerificationForm';
+import { emailSchema } from '../model/authShema';
+import { useSendVerificationCode } from '../api/queries/useSendVerificationCode';
+import { Button } from '@/shared/ui/button';
+import { Input } from '@/shared/ui/input';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 export const LoginForm = () => {
-  const form = useForm<LoginFormData>({
-    resolver: zodResolver(loginSchema),
-    defaultValues: {
-      email: '',
-      remember: false,
-    },
+  const [emailSent, setEmailSent] = useState(false);
+  const [email, setEmail] = useState('');
+  const { mutate: sendCode, isPending, error } = useSendVerificationCode();
+
+  const { register, handleSubmit, formState } = useForm({
+    resolver: zodResolver(emailSchema),
   });
 
-  const onSubmit = (data: LoginFormData) => {
-    console.log('Login data:', data);
+  const onSubmit = (data: { email: string }) => {
+    setEmail(data.email);
+    sendCode(data.email, {
+      onSuccess: () => setEmailSent(true),
+    });
   };
+
+  if (emailSent) {
+    return <CodeVerificationForm email={email} onBack={() => setEmailSent(false)} />;
+  }
 
   return (
     <div className="flex flex-col gap-10">
@@ -37,42 +39,38 @@ export const LoginForm = () => {
       <div className="w-full max-w-md space-y-4">
         <h1 className="text-xl font-semibold">Вход</h1>
 
-        <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-3">
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Почта</FormLabel>
-                  <FormControl>
-                    <Input placeholder="mail@gmail.com" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-3">
+          <div>
+            <label htmlFor="email" className="block text-sm font-medium mb-1">
+              Почта
+            </label>
+            <Input
+              id="email"
+              placeholder="mail@gmail.com"
+              type="email"
+              {...register('email')}
             />
+            {formState.errors.email && (
+              <p className="text-red-500 text-sm mt-1">
+                {formState.errors.email.message}
+              </p>
+            )}
+          </div>
 
-            <FormField
-              control={form.control}
-              name="remember"
-              render={({ field }) => (
-                <FormItem className="flex items-center">
-                  <FormControl>
-                    <Checkbox
-                      checked={field.value}
-                      onCheckedChange={field.onChange}
-                    />
-                  </FormControl>
-                  <FormLabel className="!mt-0">Запомнить меня</FormLabel>
-                </FormItem>
-              )}
-            />
-            <Button type="submit" className="w-full mt-7">
-              Получить код
-            </Button>
-          </form>
-        </Form>
+          {error && (
+            <p className="text-red-500 text-sm">
+              {error.message || 'Ошибка при отправке кода'}
+            </p>
+          )}
+
+          <Button 
+            type="submit" 
+            className="w-full mt-7"
+            disabled={isPending}
+          >
+            {isPending ? 'Отправка...' : 'Получить код'}
+          </Button>
+        </form>
       </div>
     </div>
   );

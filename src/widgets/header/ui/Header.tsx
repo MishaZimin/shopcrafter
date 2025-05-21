@@ -1,7 +1,7 @@
 'use client';
 
+import { ProfileButton } from '@/features/profile/ui/ProfileButton';
 import { useAppRouter } from '@/shared/lib/navigation';
-import { Button } from '@/shared/ui/button';
 import { LogoImage } from '@/shared/ui/logo/Logo';
 import { NavMenu } from '@/shared/ui/navbar/ui/NavMenu';
 
@@ -15,10 +15,6 @@ const navItems = [
 
 export const Header = () => {
   const { router } = useAppRouter();
-
-  const handleClick = () => {
-    router.push('/profile');
-  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-30 bg-white">
@@ -34,9 +30,7 @@ export const Header = () => {
           </button>
           <NavMenu tabs={navItems} />
         </div>
-        <Button variant="ghost" onClick={handleClick}>
-          Иван Петров
-        </Button>
+        <ProfileButton />
       </div>
     </header>
   );

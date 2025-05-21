@@ -1,38 +1,33 @@
-import { apiClient } from '@/shared/api/client';
+import axiosInstance from '@/shared/api/axiosInstance';
 
-interface AuthResponse {
-  token: string;
-  refreshToken: string;
-}
+export const AuthApi = {
+  async sendVerificationCode(email: string) {
+    const response = await axiosInstance.post(
+      `/auth/login?email=${encodeURIComponent(email)}`,
+      null
+    );
+    return response.data;
+  },
 
-export const login = async (email: string) => {
-  return apiClient.post('/auth/login', { email });
-};
+  async verifyCode(email: string, code: string) {
+    const response = await axiosInstance.post(
+      `/auth/verify-code?email=${encodeURIComponent(email)}&code=${code}`,
+      null
+    );
+    return response.data;
+  },
 
-export const verifyCode = async (
-  email: string,
-  code: string,
-): Promise<AuthResponse> => {
-  const { data } = await apiClient.post<AuthResponse>('/auth/verify-code', {
-    email,
-    code,
-  });
-  return data;
-};
+  async refreshToken(refreshToken: string) {
+    const response = await axiosInstance.post(
+      '/auth/refresh',
+      { refreshToken },
+      { headers: { 'Content-Type': 'application/json' } }
+    );
+    return response.data;
+  },
 
-export const refreshToken = async (): Promise<AuthResponse> => {
-  const refreshToken = localStorage.getItem('refreshToken');
-  const { data } = await apiClient.post<AuthResponse>('/auth/refresh', {
-    refreshToken,
-  });
-  return data;
-};
-
-export const checkAuth = async (): Promise<boolean> => {
-  try {
-    await apiClient.get('/auth/check');
-    return true;
-  } catch {
-    return false;
+  async checkAuth() {
+    const response = await axiosInstance.get('/auth/check');
+    return response.data;
   }
 };

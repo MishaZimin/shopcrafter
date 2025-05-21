@@ -9,7 +9,7 @@ export default function ShopsGrid() {
 
   return (
     <div className="container">
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3 items-stretch">
         {isLoading
           ? Array.from({ length: 3 }).map((_, index) => (
               <ShopCardSkeleton key={index} />

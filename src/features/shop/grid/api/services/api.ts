@@ -4,27 +4,25 @@ const mockShops: IShopCard[] = [
   {
     id: '1',
     name: 'Все для Бани',
-    description:
-      'Beautifully designed components built with Radix UI and Tailwind CSS.',
+    description: 'Товары для бани',
     route: 'banya-world',
   },
   {
     id: '2',
     name: 'Домашний уют',
-    description:
-      'Beautifully designed components built with Radix UI and Tailwind CSS.',
+    description: 'Товары для дома',
     route: 'home-cozy',
   },
   {
     id: '3',
-    name: 'Ювелирные издания',
-    description:
-      'Beautifully designed components built with Radix UI and Tailwind CSS.',
+    name: 'Ювелирные изделия',
+    description: 'Ювелирные изделия',
+    route: 'jewelry',
   },
 ];
 
 export const fetchShops = async (): Promise<IShopCard[]> => {
   return new Promise((resolve) => {
-    setTimeout(() => resolve(mockShops), 2000);
+    setTimeout(() => resolve(mockShops), 300);
   });
 };

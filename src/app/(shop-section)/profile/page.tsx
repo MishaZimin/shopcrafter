@@ -1,3 +1,5 @@
+import ProfileSection from '@/widgets/profile/ui/ProfileSection';
+
 export default async function Page() {
-  return <h1>Profile</h1>;
+  return <ProfileSection />;
 }

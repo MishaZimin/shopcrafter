@@ -1,14 +1,9 @@
-import * as z from 'zod';
+import { z } from 'zod';
 
-export const registerSchema = z.object({
-  name: z.string().min(1, 'Введите имя'),
-  email: z.string().email('Некорректный email').min(1, 'Введите email'),
+export const emailSchema = z.object({
+  email: z.string().email('Введите корректный email'),
 });
 
-export const loginSchema = z.object({
-  email: z.string().email('Некорректный email').min(1, 'Введите email'),
-  remember: z.boolean().optional(),
+export const codeSchema = z.object({
+  code: z.string().min(6, 'Код должен содержать 6 цифр').max(6),
 });
-
-export type RegisterFormData = z.infer<typeof registerSchema>;
-export type LoginFormData = z.infer<typeof loginSchema>;
