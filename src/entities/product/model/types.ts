@@ -1,9 +1,15 @@
-import { StaticImageData } from 'next/image';
-
-export interface IProduct {
-  id: string;
+export interface IProductNew {
+  id: number;
   name: string;
-  price: string;
   description: string;
-  image: string | StaticImageData;
+  price: number;
+  stock: number;
+  category: string;
+  imageUrls: string[];
 }
+
+export type ICreateProductDto = Omit<
+  IProductNew,
+  'id' | 'category' | 'imageUrls'
+>;
+export type IUpdateProductDto = Partial<ICreateProductDto>;

@@ -3,14 +3,14 @@
 import { Button } from '@/shared/ui/button';
 import { useAppRouter } from '@/shared/lib/navigation';
 
-export const EditButton = ({ id }: { id: string }) => {
+export const EditButton = ({ id }: { id: number }) => {
   const { router } = useAppRouter();
 
   return (
     <Button
       onClick={(e) => {
         e.stopPropagation();
-        router.push(`/my-shops/${id}/edit`);
+        router.push(`/shops/${id}/edit`);
         console.log('edit shop', id);
       }}
     >

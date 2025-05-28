@@ -1,7 +1,7 @@
 'use client';
 
 import { Card, CardContent, CardFooter } from '@/shared/ui/card';
-import { IShopCard } from '../model/types';
+import { IShopCard } from '../model/store.type';
 
 interface ShopCardProps {
   shop: IShopCard;
@@ -10,7 +10,7 @@ interface ShopCardProps {
 
 export const ShopCard = ({ shop, actionSlot }: ShopCardProps) => {
   return (
-    <Card className="w-full max-w-md">
+    <Card className="w-full max-w-md justify-between gap-4 h-full">
       {/* <CardHeader>
         <div className="w-6 h-6 rounded-full bg-graphite"></div>
       </CardHeader> */}

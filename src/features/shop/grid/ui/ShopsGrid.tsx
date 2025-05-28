@@ -1,11 +1,12 @@
-import { useShopsQuery } from '../api/queries/useShopsQuery';
 import { ShopCardSkeleton } from '@/entities/shop/ui/ShopCardSkeleton';
 import { ShopCardLink } from '@/features/shop/card/ui/ShopCardLink';
+import { useStores } from '../../api/useStores';
+import { IShopCard } from '@/entities/shop/model/store.type';
 
 export default function ShopsGrid() {
-  const { data: shops, isLoading, isError } = useShopsQuery();
+  const { data: stores, isLoading, error } = useStores();
 
-  if (isError) return <div>Ошибка загрузки</div>;
+  if (error) return <div>Error loading stores</div>;
 
   return (
     <div className="container">
@@ -14,7 +15,7 @@ export default function ShopsGrid() {
           ? Array.from({ length: 3 }).map((_, index) => (
               <ShopCardSkeleton key={index} />
             ))
-          : shops?.map((shop) => (
+          : stores?.map((shop: IShopCard) => (
               <ShopCardLink key={shop.id} shopItem={shop} />
             ))}
       </div>

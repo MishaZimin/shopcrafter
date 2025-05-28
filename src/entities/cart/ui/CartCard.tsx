@@ -21,7 +21,7 @@ export const CartCard = ({ cartItem, actionSlot }: CartCardProps) => {
       </CardHeader>
       <CardContent className="flex flex-col gap-2 min-h-[120px]">
         <h3 className="text-L font-semibold line-clamp-1">{cartItem.name}</h3>
-        <p className="text-S text-muted-foreground line-clamp-2">
+        <p className="text-S text-muted-foreground line-clamp-1">
           {cartItem.description}
         </p>
         <p className="text-L font-bold">{cartItem.price}</p>

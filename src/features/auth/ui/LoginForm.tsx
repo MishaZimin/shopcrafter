@@ -7,10 +7,11 @@ import { LogoImage } from '@/shared/ui/logo/Logo';
 
 import { CodeVerificationForm } from './CodeVerificationForm';
 import { emailSchema } from '../model/authShema';
-import { useSendVerificationCode } from '../api/queries/useSendVerificationCode';
+
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useSendVerificationCode } from '../api/useAuth';
 
 export const LoginForm = () => {
   const [emailSent, setEmailSent] = useState(false);

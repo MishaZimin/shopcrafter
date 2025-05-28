@@ -7,10 +7,11 @@ import { useRouter } from 'next/navigation';
 import { LogoImage } from '@/shared/ui/logo/Logo';
 
 import { codeSchema } from '../model/authShema';
-import { useVerifyCode } from '../api/queries/useVerifyCode';
+
 import { Button } from '@/shared/ui/button';
 import { Input } from '@/shared/ui/input';
 import { setToLocalStorage } from '@/shared/lib/local-storage';
+import { useVerifyCode } from '../api/useAuth';
 
 type CodeVerificationFormProps = {
   email: string;

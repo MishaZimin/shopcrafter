@@ -1,7 +1,6 @@
 'use client';
 
 import { atom } from 'jotai';
-import { atomWithStorage } from 'jotai/utils';
 
 export type ImageBlock = {
   id: string;
@@ -9,10 +8,7 @@ export type ImageBlock = {
   url: string;
 };
 
-export const imageBlocksAtom = atomWithStorage<Record<string, ImageBlock>>(
-  'image-blocks',
-  {},
-);
+export const imageBlocksAtom = atom<Record<string, ImageBlock>>({});
 
 export const updateImageBlockAtom = atom(
   null,
@@ -22,7 +18,7 @@ export const updateImageBlockAtom = atom(
       ...get(imageBlocksAtom),
       [blockKey]: { id: blockKey, file, url },
     });
-  },
+  }
 );
 
 export const clearImageBlockAtom = atom(null, (get, set, blockKey: string) => {

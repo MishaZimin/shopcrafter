@@ -1,62 +1,41 @@
 'use client';
 
+import { useGetStoreByIdEnabled } from '@/features/shop/api/useStores';
 import { Footer } from '@/widgets/footer/ui/Footer';
-import { CustomHeader, NavItem } from '@/widgets/header/ui/CustomHeader';
-import { getShopBySlug } from '@/features/shop/api/api';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
-import { IShop } from '@/shared/api/mock';
+import { CustomHeader } from '@/widgets/header/ui/CustomHeader';
+import { useParams } from 'next/navigation';
+
+export type NavItem = {
+  value: string;
+  label: string;
+  path: string;
+};
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const pathname = usePathname();
-  const slug = pathname.split('/')[1];
-  const [shop, setShop] = useState<IShop | null>();
-  const [loading, setLoading] = useState(true);
+  const params = useParams();
+  const storeId = Number(params.store);
+  const { data: store } = useGetStoreByIdEnabled(storeId);
 
-  const [navItems, setNavItems] = useState<NavItem[]>([]);
-
-  useEffect(() => {
-    const fetchShop = async () => {
-      const res = await getShopBySlug(slug);
-      setShop(res);
-      if (res) {
-        setNavItems([
-          { value: 'products', label: 'Товары', path: `/${res.slug}` },
-          // { value: 'cart', label: 'Корзина', path: `/${res.slug}/cart` },
-        ]);
-      }
-      setLoading(false);
-    };
-
-    fetchShop();
-  }, [slug]);
-
-  if (loading)
-    return <div className="py-20 text-center">Загрузка страницы...</div>;
-
-  if (!shop) {
-    return (
-      <div className="text-center py-20">
-        <h1 className="text-2xl font-bold">Магазин не найден</h1>
-        <p>Такого магазина не существует. Проверьте URL.</p>
-      </div>
-    );
-  }
+  const NAV_ITEMS: NavItem[] = [
+    {
+      value: 'products',
+      label: 'Товары',
+      path: `/${params.store}`,
+    },
+  ];
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col px-4 lg:px-0">
       <CustomHeader
-        logo={shop.logo}
+        logo={''}
         logoWidth={''}
-        text={shop.name}
-        navItems={navItems}
+        text={store?.name ?? '...'}
+        navItems={NAV_ITEMS}
       />
-      <main className="flex-grow pt-21">
-        <div className="mx-auto w-full px-4 sm:px-10 lg:px-0 lg:w-[1200px] ">
-          {children}
-        </div>
+      <main className="flex-grow pt-21 ">
+        <div className="mx-auto w-full  lg:max-w-[1200px] ">{children}</div>
       </main>
-      <div className="mx-auto w-full px-4 sm:px-10 lg:px-0 lg:w-[1200px] pb-8 pt-12">
+      <div className="mx-auto w-full px-4 sm:px-10 lg:px-0 lg:w-[1200px] pb-8 pt-12 ">
         <Footer />
       </div>
     </div>

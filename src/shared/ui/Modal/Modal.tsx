@@ -24,7 +24,7 @@ export const BaseModal = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent
-        className={`reltive p-6 rounded-[5px] ${sizeClasses[size]}`}
+        className={` p-6 rounded-[5px] max-h-[calc(100dvh-64px)] overflow-y-auto ${sizeClasses[size]}`}
       >
         {/* <button
           onClick={() => onOpenChange(false)}

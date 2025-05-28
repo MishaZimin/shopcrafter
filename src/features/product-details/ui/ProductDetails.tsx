@@ -1,51 +1,61 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
-import { IProduct } from '@/entities/product/model/types';
+
+import { useProduct } from '@/features/product/api/useProduct';
 import { AddCartButton } from '@/features/product/ui/AddCartButton';
-import { getProductById } from '@/features/shop/api/api';
 import Image from 'next/image';
+import { useUserStoreCategory } from '@/features/product/model/useUserStoreCategory';
 
 export const ProductDetails = () => {
   const params = useParams();
-  const id = params.id as string;
-  const [product, setProduct] = useState<IProduct | null>(null);
+  const productId = Number(params.id);
+  const {
+    storeId,
+    categoryId,
+    isLoading: isStoreLoading,
+  } = useUserStoreCategory();
 
-  useEffect(() => {
-    if (id) {
-      getProductById(id).then(setProduct);
-    }
-  }, [id]);
+  const {
+    data: product,
+    isLoading: isProductLoading,
+    error,
+  } = useProduct(storeId!, categoryId!, productId, {
+    enabled: !!storeId && !!categoryId && !!productId,
+  });
 
-  if (!product) return <div>Загрузка...</div>;
+  if (isStoreLoading || isProductLoading) return <div>Загрузка...</div>;
+  if (!product || error) return <div>Ошибка загрузки товара</div>;
 
   return (
-    <div className=" bg-base1 rounded-[5px] flex flex-row gap-8 p-6 ">
-      <div className="w-1/2">
+    <div className=" rounded-[5px] flex flex-col md:flex-row gap-8">
+      <div className="w-full md:w-1/2">
         <Image
-          src={product.image}
+          src={product.imageUrls[product.imageUrls.length - 1]}
           alt={product.name}
-          className=" w-[560px] h-full"
+          className="w-[560px] h-full object-cover rounded-[5px]"
+          width={560}
+          height={560}
         />
       </div>
-      <div className="w-1/2 flex flex-col gap-4">
+      <div className="w-full md:w-1/2 flex flex-col gap-8">
         <div className="flex flex-row w-full justify-between">
           <div className="flex-1 flex flex-col gap-y-2">
             <h4 className="text-h4 font-bold">{product.name}</h4>
-            <p className="text-xl font-bold">{product.price}</p>
+            <p className="text-xl font-bold">{product.price} ₽</p>
           </div>
-          <AddCartButton productId={product.id} />
+          <AddCartButton
+            product={{
+              id: String(product.id),
+              name: product.name,
+              price: product.price,
+              imageUrl: product.imageUrls[product.imageUrls.length - 1],
+              description: product.description,
+              stock: product.stock,
+            }}
+          />
         </div>
-
-        <div className="space-y-4 my-6">
-          <div className="flex flex-col gap-4">
-            <h3 className="font-semibold">Материал</h3>
-            <h3 className="font-semibold">Вес</h3>
-            <h3 className="font-semibold">Состав</h3>
-            <h3 className="font-semibold">Царская шапка</h3>
-          </div>
-        </div>
+        <p className="text-M">{product.description}</p>
       </div>
     </div>
   );

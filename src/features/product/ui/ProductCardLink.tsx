@@ -1,29 +1,45 @@
 'use client';
 
-import { IProduct } from '@/entities/product/model/types';
 import { usePathname, useRouter } from 'next/navigation';
-import { AddCartButton } from './AddCartButton';
 import { ProductCard } from '@/entities/product/ui/ProductCard';
+import { AddCartButton } from './AddCartButton';
+import { AdminPanelActionsProductCard } from './AdminPanelActionsProductCard';
+import { IProductNew } from '@/entities/product/model/types';
 
 interface ProductGridCardProps {
-  product: IProduct;
+  product: IProductNew;
+  isAdmin?: boolean;
 }
 
-export const ProductCardLink = ({ product }: ProductGridCardProps) => {
+export const ProductCardLink = ({ product, isAdmin }: ProductGridCardProps) => {
   const router = useRouter();
   const pathname = usePathname();
   const slug = pathname.split('/')[1];
 
   const handleClick = () => {
-    router.push(`/${slug}/${product.id}`);
-    console.log('go card', product.id);
+    if (!isAdmin) router.push(`/${slug}/${product.id}`);
   };
 
   return (
     <div onClick={handleClick} className="cursor-pointer">
       <ProductCard
         product={product}
-        actionSlot={<AddCartButton productId={product.id} />}
+        actionSlot={
+          isAdmin ? (
+            <AdminPanelActionsProductCard productId={product.id} />
+          ) : (
+            <AddCartButton
+              product={{
+                id: String(product.id),
+                name: product.name,
+                price: product.price,
+                imageUrl: product.imageUrls[product.imageUrls.length - 1],
+                description: product.description,
+                stock: product.stock,
+              }}
+            />
+          )
+        }
       />
     </div>
   );

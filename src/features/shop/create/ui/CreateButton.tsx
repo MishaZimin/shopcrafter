@@ -1,8 +1,8 @@
 'use client';
 
-import { CreateShopModal } from '@/features/create-shop/ui/CreateShopModal';
 import { Button } from '@/shared/ui/button';
 import { useState } from 'react';
+import { CreateShopModal } from './CreateShopModal';
 
 export const CreateButton = () => {
   const [open, setOpen] = useState(false);
