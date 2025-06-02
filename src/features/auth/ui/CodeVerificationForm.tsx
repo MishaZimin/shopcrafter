@@ -18,9 +18,9 @@ type CodeVerificationFormProps = {
   onBack?: () => void;
 };
 
-export const CodeVerificationForm = ({ 
-  email, 
-  onBack 
+export const CodeVerificationForm = ({
+  email,
+  onBack,
 }: CodeVerificationFormProps) => {
   const router = useRouter();
   const { mutate: verifyCode, isPending } = useVerifyCode();
@@ -30,17 +30,20 @@ export const CodeVerificationForm = ({
     defaultValues: { code: '' },
   });
 
-const onSubmit = (data: { code: string }) => {
-  verifyCode({ email, code: data.code }, {
-    onSuccess: (userData) => {
-      console.log(userData);
-      setToLocalStorage('accessToken', userData.jwtToken);
-      setToLocalStorage('refreshToken', userData.refreshToken);
+  const onSubmit = (data: { code: string }) => {
+    verifyCode(
+      { email, code: data.code },
+      {
+        onSuccess: (userData) => {
+          console.log(userData);
+          setToLocalStorage('accessToken', userData.jwtToken);
+          setToLocalStorage('refreshToken', userData.refreshToken);
 
-      router.push('/');
-    },
-  });
-};
+          router.push('/my-shops');
+        },
+      }
+    );
+  };
 
   return (
     <div className="flex flex-col gap-10">
@@ -70,28 +73,16 @@ const onSubmit = (data: { code: string }) => {
             )}
           </div>
 
-          <Button 
-            type="submit" 
-            className="w-full"
-            disabled={isPending}
-          >
+          <Button type="submit" className="w-full" disabled={isPending}>
             {isPending ? 'Проверка...' : 'Войти'}
           </Button>
         </form>
 
         <div className="flex flex-col gap-2 text-center text-sm">
-          <Button 
-            variant="link" 
-            className="p-0 h-auto" 
-            onClick={onBack}
-          >
+          <Button variant="link" className="p-0 h-auto" onClick={onBack}>
             Отправить код снова
           </Button>
-          <Button 
-            variant="link" 
-            className="p-0 h-auto" 
-            onClick={onBack}
-          >
+          <Button variant="link" className="p-0 h-auto" onClick={onBack}>
             Изменить email
           </Button>
         </div>

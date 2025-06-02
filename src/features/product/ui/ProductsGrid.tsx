@@ -17,27 +17,35 @@ export default function ProductGrid({ isAdmin = false }: ProductGridProps) {
     ? useStoreCategoryIds()
     : useUserStoreCategory();
   console.log(storeId, categoryId);
-  const { data: products, isLoading } = useProducts(storeId, categoryId);
+  const {
+    data: products,
+    isLoading,
+    isFetched,
+  } = useProducts(storeId, categoryId);
 
-  if (!products?.length && !isLoading) {
+  if (isLoading && !isFetched) {
+    return (
+      <div className="container min-w-full">
+        <SkeletonGridLoader columns={4} itemHeight={456} rows={1} />
+      </div>
+    );
+  }
+
+  if (!products?.length && isFetched) {
     return <div className="text-center py-10">Товары не найдены</div>;
   }
 
   return (
     <div className="container min-w-full">
-      {!isLoading && products ? (
-        <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-4">
-          {products.map((product: IProductNew) => (
-            <ProductCardLink
-              key={product.id}
-              product={product}
-              isAdmin={isAdmin}
-            />
-          ))}
-        </div>
-      ) : (
-        <SkeletonGridLoader columns={4} itemHeight={456} rows={1} />
-      )}
+      <div className="grid gap-6 md:grid-cols-3 lg:grid-cols-4">
+        {(products || []).map((product: IProductNew) => (
+          <ProductCardLink
+            key={product.id}
+            product={product}
+            isAdmin={isAdmin}
+          />
+        ))}
+      </div>
     </div>
   );
 }

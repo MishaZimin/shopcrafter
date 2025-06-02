@@ -7,12 +7,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <Header />
 
       <main className="flex-1 flex flex-col">
-        <div className="flex-1 mx-auto w-full px-4 sm:px-10 lg:px-0 lg:w-[1200px] pt-21">
+        <div className="flex-1 mx-auto w-full px-1 sm:px-10 lg:px-0 lg:max-w-[1200px] pt-21">
           {children}
         </div>
       </main>
 
-      <div className="mx-auto w-full px-4 sm:px-10 lg:px-0 lg:w-[1200px] pb-8 pt-12">
+      <div className="mx-auto w-full px-4 sm:px-10 lg:px-0 lg:max-w-[1200px] pb-8 pt-12">
         <Footer />
       </div>
     </div>

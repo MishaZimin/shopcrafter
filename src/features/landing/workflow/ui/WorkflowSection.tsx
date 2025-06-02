@@ -7,7 +7,7 @@ export const WorkflowSection = () => {
   return (
     <section id="features" className=" mb-16">
       <h1 className="text-h2 mb-8">Как работает</h1>
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
         <WorkflowCard
           image={Handmade}
           title={'1. Выбираешь дизайн'}

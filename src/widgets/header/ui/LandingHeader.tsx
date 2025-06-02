@@ -46,8 +46,7 @@ export const LandingHeader = () => {
           <div className="max-w-[148px]">
             <LogoImage />
           </div>
-
-          <div className="">
+          <div className="hidden md:block">
             <Navbar items={NAV_ITEMS} orientation="horizontal" />
           </div>
           <div className="">

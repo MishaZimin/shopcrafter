@@ -7,7 +7,7 @@ export const AudienceSection = () => {
   return (
     <section id="hero" className=" mb-16">
       <h1 className="text-h2 mb-8">Для кого</h1>
-      <div className="flex flex-row gap-4">
+      <div className="flex flex-col lg:flex-row gap-4 w-full">
         <AudienceCard
           image={Handmade}
           title={'Мастера handmade'}

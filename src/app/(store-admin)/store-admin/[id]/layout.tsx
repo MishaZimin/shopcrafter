@@ -12,7 +12,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           {children}
         </div>
       </main>
-      <div className="mx-auto w-full px-4  lg:px-0 lg:w-[1200px] pb-8 pt-12">
+      <div className="mx-auto w-full px-4  lg:px-0 lg:max-w-[1200px] pb-8 pt-12">
         <Footer />
       </div>
     </div>

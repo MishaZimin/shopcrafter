@@ -10,7 +10,9 @@ export const EditButton = ({ id }: { id: number }) => {
     <Button
       onClick={(e) => {
         e.stopPropagation();
-        router.push(`/shops/${id}/edit`);
+        // router.push(`/shops/${id}/edit`);
+
+        router.push(`/store-admin/${id}/products`);
         console.log('edit shop', id);
       }}
     >

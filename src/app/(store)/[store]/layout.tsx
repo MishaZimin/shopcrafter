@@ -35,7 +35,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <main className="flex-grow pt-21 ">
         <div className="mx-auto w-full  lg:max-w-[1200px] ">{children}</div>
       </main>
-      <div className="mx-auto w-full px-4 sm:px-10 lg:px-0 lg:w-[1200px] pb-8 pt-12 ">
+      <div className="mx-auto w-full px-4 sm:px-10 lg:px-0 lg:max-w-[1200px] pb-8 pt-12 ">
         <Footer />
       </div>
     </div>
