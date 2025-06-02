@@ -6,7 +6,7 @@ type ProductPayload = {
   description: string;
   price: number;
   stock: number;
-  image: File;
+  image?: File | null;
 };
 
 export const useBaseProductMutation = ({
@@ -35,7 +35,9 @@ export const useBaseProductMutation = ({
           )
         : await ProductApi.createProduct(storeId, categoryId, productData);
 
-      await ProductApi.uploadImage(storeId, categoryId, product.id, image);
+      if (image) {
+        await ProductApi.uploadImage(storeId, categoryId, product.id, image);
+      }
 
       return product;
     },

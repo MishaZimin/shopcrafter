@@ -20,6 +20,7 @@ import type { ProductFormValues } from '../model/productFormSchema';
 import { useAtomValue } from 'jotai';
 import { imageBlocksAtom } from '@/shared/lib/image-store';
 import { Textarea } from '@/shared/ui/textarea';
+import Image from 'next/image';
 
 interface IProps {
   open: boolean;
@@ -32,6 +33,7 @@ interface IProps {
     description: string;
     price: number;
     stock: number;
+    imageUrl?: string;
   };
 }
 
@@ -63,7 +65,6 @@ export const CreateOrEditProductModal = ({
   const [imageError, setImageError] = useState<string | null>(null);
   const imageBlocks = useAtomValue(imageBlocksAtom);
   const imageFile = imageBlocks[IMAGE_BLOCK_KEY]?.file as File;
-  // const hasImage = !!imageBlocks[IMAGE_BLOCK_KEY]?.url;
 
   const { data: productData } = useProduct(
     storeId,
@@ -86,15 +87,17 @@ export const CreateOrEditProductModal = ({
 
   const onSubmit = async (data: ProductFormValues) => {
     try {
-      if (!imageFile) {
-        setImageError('Изображение обязательно');
+      if (!productId && !imageFile) {
+        setImageError('Изображение обязательно для нового товара');
         return;
       }
 
+      const image = productId ? imageFile || undefined : imageFile;
+
       if (productId) {
-        await updateMutation.mutateAsync({ ...data, image: imageFile });
+        await updateMutation.mutateAsync({ ...data, image });
       } else {
-        await createMutation.mutateAsync({ ...data, image: imageFile });
+        await createMutation.mutateAsync({ ...data, image: image! });
       }
 
       onOpenChange(false);
@@ -123,11 +126,21 @@ export const CreateOrEditProductModal = ({
           <label className="text-S font-medium">Фото товара</label>
           <div className="flex flex-row gap-2 ">
             <div className="h-[272px] min-w-[272px]">
-              <ImagePreview
-                blockKey={IMAGE_BLOCK_KEY}
-                className="rounded-md object-cover"
-                showPlaceholder={true}
-              />
+              {initialData?.imageUrl && !imageFile ? (
+                <Image
+                  src={initialData?.imageUrl}
+                  alt={'imageUrl'}
+                  width={272}
+                  height={272}
+                  className="rounded-md min-h-[272px] min-w-[272px] object-cover"
+                />
+              ) : (
+                <ImagePreview
+                  blockKey={IMAGE_BLOCK_KEY}
+                  className="rounded-md object-cover"
+                  showPlaceholder={true}
+                />
+              )}
             </div>
             <ImagePicker
               className="w-full"

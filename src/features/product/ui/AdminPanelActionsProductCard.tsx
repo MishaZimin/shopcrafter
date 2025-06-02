@@ -11,11 +11,13 @@ import { useDeleteProduct, useProduct } from '../api/useProduct';
 
 interface IProps {
   productId: number;
+  imageUrl?: string;
   onDeleted?: (id: number) => void;
 }
 
 export const AdminPanelActionsProductCard = ({
   productId,
+  imageUrl,
   onDeleted,
 }: IProps) => {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
@@ -99,6 +101,7 @@ export const AdminPanelActionsProductCard = ({
                   description: productData.description || '',
                   price: productData.price,
                   stock: productData.stock,
+                  imageUrl: imageUrl,
                 }
               : undefined
           }

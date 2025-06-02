@@ -26,7 +26,7 @@ export default function ProductGrid({ isAdmin = false }: ProductGridProps) {
   if (isLoading && !isFetched) {
     return (
       <div className="container min-w-full">
-        <SkeletonGridLoader columns={4} itemHeight={456} rows={1} />
+        <SkeletonGridLoader columns={4} itemHeight={436} rows={1} />
       </div>
     );
   }

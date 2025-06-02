@@ -26,7 +26,10 @@ export const ProductCardLink = ({ product, isAdmin }: ProductGridCardProps) => {
         product={product}
         actionSlot={
           isAdmin ? (
-            <AdminPanelActionsProductCard productId={product.id} />
+            <AdminPanelActionsProductCard
+              productId={product.id}
+              imageUrl={product.imageUrls[product.imageUrls?.length - 1]}
+            />
           ) : (
             <AddCartButton
               product={{

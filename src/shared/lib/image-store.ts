@@ -4,7 +4,7 @@ import { atom } from 'jotai';
 
 export type ImageBlock = {
   id: string;
-  file?: File;
+  file?: File | null;
   url: string;
 };
 
@@ -13,11 +13,13 @@ export const imageBlocksAtom = atom<Record<string, ImageBlock>>({});
 export const updateImageBlockAtom = atom(
   null,
   (get, set, { blockKey, file }: { blockKey: string; file: File }) => {
-    const url = URL.createObjectURL(file);
-    set(imageBlocksAtom, {
-      ...get(imageBlocksAtom),
-      [blockKey]: { id: blockKey, file, url },
-    });
+    if (file) {
+      const url = URL.createObjectURL(file);
+      set(imageBlocksAtom, {
+        ...get(imageBlocksAtom),
+        [blockKey]: { id: blockKey, file, url },
+      });
+    }
   }
 );
 

@@ -6,6 +6,7 @@ import { useProduct } from '@/features/product/api/useProduct';
 import { AddCartButton } from '@/features/product/ui/AddCartButton';
 import Image from 'next/image';
 import { useUserStoreCategory } from '@/features/product/model/useUserStoreCategory';
+import { SkeletonGridLoader } from '@/shared/ui/SkeletonGridLoader/SkeletonGridLoader';
 
 export const ProductDetails = () => {
   const params = useParams();
@@ -23,8 +24,19 @@ export const ProductDetails = () => {
   } = useProduct(storeId!, categoryId!, productId, {
     enabled: !!storeId && !!categoryId && !!productId,
   });
-
-  if (isStoreLoading || isProductLoading) return <div>Загрузка...</div>;
+  // interface SkeletonGridLoaderProps {
+  //   columns?: number;
+  //   rows?: number;
+  //   itemHeight?: number;
+  //   total?: number;
+  //   className?: string;
+  // }
+  if (isStoreLoading || isProductLoading)
+    return (
+      <div className="w-full">
+        <SkeletonGridLoader rows={1} columns={2} itemHeight={560} total={2} />
+      </div>
+    );
   if (!product || error) return <div>Ошибка загрузки товара</div>;
 
   return (
