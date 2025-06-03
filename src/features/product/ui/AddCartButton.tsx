@@ -7,15 +7,15 @@ import {
 
 import { Button } from '@/shared/ui/button';
 import { useSetAtom } from 'jotai';
-import { useParams } from 'next/navigation';
+import { useUserStoreCategory } from '../model/useUserStoreCategory';
 
 interface AddCartButtonProps {
   product: Omit<CartItem, 'quantity'>;
 }
 
 export const AddCartButton = ({ product }: AddCartButtonProps) => {
-  const { store } = useParams();
-  const storeId = Number(store);
+  const { storeId } = useUserStoreCategory();
+
   console.log(storeId);
   const { addToCartAtom } = useStoreCartAtoms(storeId);
   const addToCart = useSetAtom(addToCartAtom);

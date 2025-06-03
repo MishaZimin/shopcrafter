@@ -14,15 +14,17 @@ export const ProductCard = ({ product, actionSlot }: ShopCardProps) => {
   return (
     <Card className="w-full gap-0">
       <CardHeader className="pb-4">
-        <div className="relative w-full aspect-square">
-          <Image
-            src={String(product.imageUrls[product.imageUrls.length - 1])}
-            alt="ImageProduct"
-            fill
-            className="rounded-[5px] object-cover"
-            sizes="100vw"
-          />
-        </div>
+        {product.imageUrls.length > 0 && (
+          <div className="relative w-full aspect-square">
+            <Image
+              src={String(product.imageUrls[product.imageUrls.length - 1])}
+              alt="ImageProduct"
+              fill
+              className="rounded-[5px] object-cover"
+              sizes="100vw"
+            />
+          </div>
+        )}
       </CardHeader>
       <CardContent className="flex flex-col gap-2 min-h-[100px]">
         <h3 className="text-L font-semibold line-clamp-1">{product.name}</h3>

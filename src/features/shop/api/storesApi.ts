@@ -10,6 +10,10 @@ export const StoresApi = {
     const response = await axiosInstance.get(`/stores/${id}`);
     return response.data;
   },
+  async getStoresByName(name: string) {
+    const response = await axiosInstance.get(`/stores/bydescription/${name}`);
+    return response.data;
+  },
 
   async createStore(storeData: { name: string; description: string }) {
     const response = await axiosInstance.post('/stores', storeData);

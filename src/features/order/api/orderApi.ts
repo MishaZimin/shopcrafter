@@ -19,18 +19,30 @@ export interface OrderResponse {
   items: ProductItem[];
   totalAmount: number;
   customerInfo: OrderFormValues;
+  paymentUrl: string;
 }
 
 export const postOrder = async (
   orderData: OrderRequest
 ): Promise<OrderResponse> => {
-  const response = await axiosInstance.post<OrderResponse>(
-    '/orders',
-    orderData
-  );
-  return response.data;
-};
+  try {
+    const response = await axiosInstance.post<OrderResponse>(
+      '/orders',
+      orderData
+    );
 
+    if (response.data.paymentUrl) {
+      window.open(response.data.paymentUrl, '_blank', 'noopener,noreferrer');
+    } else {
+      console.error('Payment URL not found in response');
+    }
+
+    return response.data;
+  } catch (error) {
+    console.error('Error creating order:', error);
+    throw error;
+  }
+};
 export const getOrders = async (): Promise<OrderResponse[]> => {
   const response = await axiosInstance.get<OrderResponse[]>('/orders');
   return response.data;

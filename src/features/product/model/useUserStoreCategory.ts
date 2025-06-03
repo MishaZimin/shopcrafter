@@ -8,17 +8,27 @@ export const useUserStoreCategory = () => {
   const params = useParams();
   const storeParam = params?.store;
 
-  const storeId = Number(storeParam);
+  // const storeId = Number(storeParam);
+  const storeName = String(storeParam);
 
-  const { data: storeData, isLoading } = useQuery({
-    queryKey: ['store', storeId],
-    queryFn: () => StoresApi.getStoresById(storeId),
-    enabled: !!storeId,
+  const { data: storeNameData, isLoading } = useQuery({
+    queryKey: ['store', storeName],
+    queryFn: () => StoresApi.getStoresByName(storeName),
+    enabled: !!storeName,
   });
 
+  // const { data: storeData, isLoading } = useQuery({
+  //   queryKey: ['store', storeId],
+  //   queryFn: () => StoresApi.getStoresById(storeId),
+  //   // queryFn: () => StoresApi.getStoresByName(storeName),
+  //   enabled: !!storeId,
+  // });
+
   return {
-    storeId: storeData?.id ?? null,
-    categoryId: storeData?.categories[0] ?? null,
+    store: storeNameData,
+    storeName: storeNameData?.description ?? null,
+    storeId: storeNameData?.id ?? null,
+    categoryId: storeNameData?.categories[0] ?? null,
     isLoading,
   };
 };

@@ -40,6 +40,14 @@ export const useGetStoreByIdEnabled = (id: number) => {
   });
 };
 
+export const useGetStoreByNameEnabled = (name: string) => {
+  return useQuery({
+    queryKey: ['store', name],
+    queryFn: () => StoresApi.getStoresByName(name),
+    enabled: !!name,
+  });
+};
+
 export const useUpdateStore = () => {
   const queryClient = useQueryClient();
 

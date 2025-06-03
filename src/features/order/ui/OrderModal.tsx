@@ -9,10 +9,10 @@ import { Input } from '@/shared/ui/input';
 import { Button } from '@/shared/ui/button';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 import { orderSchema, OrderFormValues } from '../model/orderSchema';
-import { useParams } from 'next/navigation';
 import { RadioGroup, RadioGroupItem } from '@/shared/ui/radio-group';
 import { useCreateOrder } from '../api/useCreateOrder';
 import { OrderRequest } from '../api/orderApi';
+import { useUserStoreCategory } from '@/features/product/model/useUserStoreCategory';
 
 interface OrderModalProps {
   open: boolean;
@@ -20,8 +20,7 @@ interface OrderModalProps {
 }
 
 export const OrderModal = ({ open, onOpenChange }: OrderModalProps) => {
-  const { store } = useParams();
-  const storeId = Number(store);
+  const { storeId } = useUserStoreCategory();
 
   const {
     register,
@@ -61,6 +60,8 @@ export const OrderModal = ({ open, onOpenChange }: OrderModalProps) => {
 
     try {
       const result = await createOrderMutation.mutateAsync(payload);
+      localStorage.removeItem(`cart-${storeId}`);
+      onOpenChange(false);
       console.log('Заказ создан:', result);
     } catch (error) {
       console.error('Ошибка создания заказа:', error);
@@ -156,7 +157,7 @@ export const OrderModal = ({ open, onOpenChange }: OrderModalProps) => {
                     <label htmlFor="cash">Наличные</label>
                   </div>
                   <div className="flex items-center space-x-2">
-                    <RadioGroupItem id="card" value="CARD" />
+                    <RadioGroupItem id="card" value="ONLINE_CARD" />
                     <label htmlFor="card">Картой</label>
                   </div>
                 </RadioGroup>

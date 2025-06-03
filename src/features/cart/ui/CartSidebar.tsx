@@ -14,14 +14,13 @@ import { Badge } from '@/shared/ui/badge';
 import { CartItemCard } from './CartItemCard';
 import { useState } from 'react';
 
-import { useParams } from 'next/navigation';
 import { OrderModal } from '@/features/order/ui/OrderModal';
 import { useSyncedCart } from '../model/useSyncedCart';
 import { CartItem, useStoreCartAtoms } from '../model/cartAtomsMap';
+import { useUserStoreCategory } from '@/features/product/model/useUserStoreCategory';
 
 export function CartSidebar() {
-  const { store } = useParams();
-  const storeId = Number(store);
+  const { storeId } = useUserStoreCategory();
 
   useSyncedCart();
 

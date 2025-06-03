@@ -1,9 +1,8 @@
 'use client';
 
-import { useGetStoreByIdEnabled } from '@/features/shop/api/useStores';
+import { useUserStoreCategory } from '@/features/product/model/useUserStoreCategory';
 import { Footer } from '@/widgets/footer/ui/Footer';
 import { CustomHeader } from '@/widgets/header/ui/CustomHeader';
-import { useParams } from 'next/navigation';
 
 export type NavItem = {
   value: string;
@@ -12,15 +11,21 @@ export type NavItem = {
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  const params = useParams();
-  const storeId = Number(params.store);
-  const { data: store } = useGetStoreByIdEnabled(storeId);
+  // const params = useParams();
+  // const storeId = Number(params.store);
+  // const { data: store } = useGetStoreByIdEnabled(storeId);
 
+  const { store, storeName, isLoading } = useUserStoreCategory();
+  //  @@@
+  // const storeId = params.store;
+  // const { data: store } = useGetStoreByNameEnabled(storeId);
+
+  if (isLoading) return <>...</>;
   const NAV_ITEMS: NavItem[] = [
     {
       value: 'products',
       label: 'Товары',
-      path: `/${params.store}`,
+      path: `/${storeName}`,
     },
   ];
 
@@ -29,7 +34,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <CustomHeader
         logo={''}
         logoWidth={''}
-        text={store?.name ?? '...'}
+        text={store.name ?? '...'}
         navItems={NAV_ITEMS}
       />
       <main className="flex-grow pt-21 ">

@@ -1,6 +1,7 @@
 'use client';
 
 import { Dialog, DialogContent } from '@/shared/ui/dialog';
+import { DialogTitle } from '@radix-ui/react-dialog';
 
 interface BaseModalProps {
   open: boolean;
@@ -26,12 +27,7 @@ export const BaseModal = ({
       <DialogContent
         className={` p-6 rounded-[5px] max-h-[calc(100dvh-64px)] overflow-y-auto ${sizeClasses[size]}`}
       >
-        {/* <button
-          onClick={() => onOpenChange(false)}
-          className="absolute right-[-50px] w-10 h-10 rounded-full bg-white flex justify-center items-center border-1 border-slate-200"
-        >
-          <span className="sr-only">Закрыть</span>
-        </button> */}
+        <DialogTitle></DialogTitle>
         {children}
       </DialogContent>
     </Dialog>

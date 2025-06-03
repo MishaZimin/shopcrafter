@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
 import { ShopCard } from '@/entities/shop/ui/ShopCard';
 
 import { EditButton } from '../../edit/ui/EditButton';
@@ -17,12 +16,11 @@ interface ShopCardLinkProps {
 }
 
 export const ShopCardLink = ({ shopItem }: ShopCardLinkProps) => {
-  const router = useRouter();
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
 
   const handleClick = () => {
-    router.push(`/${shopItem.id}`);
+    window.open(`/${shopItem.description}`, '_blank', 'noopener,noreferrer');
   };
 
   return (
