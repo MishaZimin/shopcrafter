@@ -5,7 +5,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import { getFromLocalStorage } from '@/shared/lib/local-storage';
 
 const PUBLIC_PATHS = ['/auth', '/info'];
-const PUBLIC_PATH_REGEX = /^\/([a-zA-Z0-9-]+)$/;
+const PUBLIC_PATH_REGEX = /^\/[a-zA-Z0-9-]+(\/[a-zA-Z0-9-]+)*$/;
 
 type Props = {
   children: React.ReactNode;
