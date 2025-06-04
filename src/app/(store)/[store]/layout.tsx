@@ -3,6 +3,7 @@
 import { useUserStoreCategory } from '@/features/product/model/useUserStoreCategory';
 import { Footer } from '@/widgets/footer/ui/Footer';
 import { CustomHeader } from '@/widgets/header/ui/CustomHeader';
+import { useEffect } from 'react';
 
 export type NavItem = {
   value: string;
@@ -11,16 +12,16 @@ export type NavItem = {
 };
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
-  // const params = useParams();
-  // const storeId = Number(params.store);
-  // const { data: store } = useGetStoreByIdEnabled(storeId);
-
   const { store, storeName, isLoading } = useUserStoreCategory();
-  //  @@@
-  // const storeId = params.store;
-  // const { data: store } = useGetStoreByNameEnabled(storeId);
+
+  useEffect(() => {
+    if (!isLoading && store?.id && store?.description) {
+      localStorage.setItem('lastVisitedStore', store.description);
+    }
+  }, [isLoading, store]);
 
   if (isLoading) return <>...</>;
+
   const NAV_ITEMS: NavItem[] = [
     {
       value: 'products',

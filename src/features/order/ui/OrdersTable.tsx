@@ -11,6 +11,7 @@ import {
 import { ProductItem } from '../api/orderApi';
 import { BaseModal } from '@/shared/ui/Modal/Modal';
 import { useState } from 'react';
+import { DialogTitle } from '@radix-ui/react-dialog';
 
 export interface CustomerInfo {
   name: string;
@@ -97,9 +98,9 @@ export const OrdersTable = ({ orders }: { orders: Order[] }) => {
       >
         {selectedOrder && (
           <div className="space-y-4">
-            <h2 className="text-xl font-bold">
+            <DialogTitle className="text-xl font-bold">
               Детали заказа #{selectedOrder.id}
-            </h2>
+            </DialogTitle>
 
             <div className="grid gap-4 md:grid-cols-2">
               <div>

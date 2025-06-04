@@ -33,6 +33,7 @@ export const postOrder = async (
 
     if (response.data.paymentUrl) {
       window.open(response.data.paymentUrl, '_blank', 'noopener,noreferrer');
+      
     } else {
       console.error('Payment URL not found in response');
     }

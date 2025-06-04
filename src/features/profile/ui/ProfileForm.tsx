@@ -19,6 +19,8 @@ import {
 import { useCurrentUser } from '../api/useCurrentUser';
 import { useUpdateProfile } from '../api/useUpdateProfile';
 import { useEffect, useState } from 'react';
+import { SkeletonGridLoader } from '@/shared/ui/SkeletonGridLoader/SkeletonGridLoader';
+import { LogoutButton } from './LogoutButton';
 
 const MOCK_VALUES = {
   legalEntity: 'ООО «Моя оборона»',
@@ -68,7 +70,12 @@ export const ProfileForm = () => {
     setMockValues((prev) => ({ ...prev, [field]: value }));
   };
 
-  if (isLoading) return <p>Загрузка профиля...</p>;
+  if (isLoading)
+    return (
+      <>
+        <SkeletonGridLoader columns={1} rows={7} itemHeight={50} total={5} />
+      </>
+    );
   if (isError || !data) return <p>Ошибка загрузки профиля</p>;
 
   return (
@@ -164,6 +171,7 @@ export const ProfileForm = () => {
         >
           {updateProfile.isPending ? 'Сохранение...' : 'Сохранить'}
         </Button>
+        <LogoutButton />
       </form>
     </Form>
   );
